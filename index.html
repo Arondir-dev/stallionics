@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stallionics | Enterprise Data Structuring & Digital Architecture</title>
+    <meta name="description" content="Stallionics – Premium solutions for data organization, directory architecture, and digital system efficiency.">
+    <link rel="icon" type="image/png" href="Stallionics-Icon.png">
+    
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Theme Variables */
+        :root {
+            /* Dark Theme (Default) */
+            --bg-color: #0b1120;
+            --header-bg: rgba(30, 41, 59, 0.85);
+            --card-bg: #1e293b;
+            --card-border: #334155;
+            --primary-blue: #38bdf8;
+            --primary-hover: #0284c7;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-glow: rgba(56, 189, 248, 0.15);
+            --input-bg: #0b1120;
+            --box-before-border: #ef4444;
+            --box-after-border: #10b981;
+        }
+
+        [data-theme="light"] {
+            /* Light Theme Override */
+            --bg-color: #f8fafc;
+            --header-bg: rgba(255, 255, 255, 0.85);
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --primary-blue: #0284c7;
+            --primary-hover: #0369a1;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent-glow: rgba(2, 132, 199, 0.12);
+            --input-bg: #f1f5f9;
+            --box-before-border: #dc2626;
+            --box-after-border: #059669;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        header {
+            background-color: var(--header-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .logo-group img {
+            height: 42px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--text-main);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 0.5rem 0.9rem;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 3rem auto 5rem auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+
+        .banner-container {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .banner-img {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 720px;
+            margin: 0 auto 2.5rem auto;
+            font-weight: 300;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            font-weight: 600;
+            padding: 0.9rem 2.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Services Grid */
+        .services-section {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.2rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
+            padding: 5rem 1.5rem;
+            margin: 5rem 0;
+        }
+
+        .comparison-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .comp-box {
+            background-color: var(--bg-color);
+            border: 1px solid var(--card-border);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .comp-box.before { border-left: 4px solid var(--box-before-border); }
+        .comp-box.after { border-left: 4px solid var(--box-after-border); }
+
+        .comp-box h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comp-box ul {
+            list-style: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .comp-box ul li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            max-width: 800px;
+            margin: 5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .faq-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+        }
+
+        .faq-item h4 {
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            max-width: 700px;
+            margin: 5rem auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+
+        .contact-form {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background-color: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .comparison-container { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo-group">
+                <img src="Stallionics-Icon.png" alt="Stallionics Logo">
+                <span class="logo-text">STALLIONICS</span>
+            </a>
+            <div class="nav-right">
+                <nav class="nav-links">
+                    <a href="#services">Services</a>
+                    <a href="#benefits">Benefits</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#contact" class="btn-primary" style="padding: 0.5rem 1.2rem;">Contact</a>
+                </nav>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    <span id="themeText">Dark</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="banner-container">
+                <img src="Stallionics-Banner.jpg" alt="Stallionics Banner" class="banner-img">
+            </div>
+            <h1>Digital Data Architecture. <span>Absolute Structure.</span></h1>
+            <p>Stallionics transforms complex, unstructured data into scalable, intuitive directory systems—maximizing productivity and eliminating time spent searching.</p>
+            <a href="#contact" class="btn-primary">
+                <i class="fa-solid fa-arrow-right"></i> Request a Project
+            </a>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services-section">
+            <h2 class="section-title">Core Capabilities</h2>
+            <div class="services-grid">
+                <div class="card">
+                    <i class="fa-solid fa-folder-tree card-icon"></i>
+                    <h3>Directory Architecture</h3>
+                    <p>Designing custom, intuitive folder hierarchies tailored for businesses, agencies, and large digital media archives.</p>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-broom card-icon"></i>
+                    <h3>Data Cleanup & Standardization</h3>
+                    <p>Systematic elimination of redundant files, duplicate filtering, and establishing clear naming conventions across all directories.</p>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-gauge-high card-icon"></i>
+                    <h3>Workflow Optimization</h3>
+                    <p>Streamlining file retrieval speeds through logical taxonomy, reducing access friction and improving digital teamwork.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison / Benefits Section -->
+        <section id="benefits" class="comparison-section">
+            <h2 class="section-title">The Stallionics Standard</h2>
+            <div class="comparison-container">
+                <div class="comp-box before">
+                    <h4 style="color: var(--box-before-border);"><i class="fa-solid fa-xmark"></i> Before (Digital Chaos)</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-minus"></i> Endless searching for file versions</li>
+                        <li><i class="fa-solid fa-minus"></i> Inconsistent folder naming & structure</li>
+                        <li><i class="fa-solid fa-minus"></i> Wasted storage due to unindexed duplicates</li>
+                    </ul>
+                </div>
+                <div class="comp-box after">
+                    <h4 style="color: var(--box-after-border);"><i class="fa-solid fa-check"></i> After (Stallionics System)</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Instant file retrieval within seconds</li>
+                        <li><i class="fa-solid fa-check"></i> Clear, logical directory hierarchy for every project</li>
+                        <li><i class="fa-solid fa-check"></i> Clean, efficient, and fully optimized storage space</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq-section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h4>How does the data organization process work?</h4>
+                <p>After evaluating your current directory setup, we draft a tailored folder architecture. Upon review and approval, we systematically structure your data and provide documentation to maintain the new standard long-term.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How do you handle data privacy and confidentiality?</h4>
+                <p>Confidentiality is fundamental to our service. We are fully prepared to sign a Non-Disclosure Agreement (NDA) prior to reviewing or organizing any project files.</p>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section id="contact" class="contact-section">
+            <h2 class="section-title">Optimize Your Digital Workspace</h2>
+            <p style="color: var(--text-muted);">Send us your requirements—we will get back to you within 24 hours with a structural proposal.</p>
+            
+            <form class="contact-form" action="mailto:contact@stallionics.com" method="post" enctype="text/plain">
+                <div class="form-group">
+                    <label for="name">Name / Company</label>
+                    <input type="text" id="name" name="name" required placeholder="e.g. John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="service">Requested Service</label>
+                    <select id="service" name="service">
+                        <option value="architecture">Directory Architecture & Restructuring</option>
+                        <option value="cleanup">Data Cleanup & Duplicate Removal</option>
+                        <option value="consulting">System Audit & Workflow Consulting</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Overview</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Briefly describe your current setup or requirements..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-paper-plane"></i> Send Inquiry
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Stallionics. Enterprise Data Structuring & Digital Architecture.</p>
+    </footer>
+
+    <!-- JavaScript for Dark/Light Mode Toggle -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const body = bodyElement = document.body;
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.className = 'fa-solid fa-sun';
+                themeText.textContent = 'Light';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fa-solid fa-moon';
+                themeText.textContent = 'Dark';
+            }
+        });
+    </script>
+</body>
+</html>
